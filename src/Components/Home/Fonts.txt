@@ -1,0 +1,9 @@
+Fonts used in this design:
+
+Font: Syne
+Author: Bonjour Monde,Lucas Descroix
+Url: https://fonts.google.com/specimen/Syne
+
+Font: Poppins
+Author: Indian Type Foundry,Jonny Pinhorn
+Url: https://fonts.google.com/specimen/Poppins
