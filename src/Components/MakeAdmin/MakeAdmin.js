@@ -12,7 +12,7 @@ const MakeAdmin = () => {
     }
     const handleAdminSubmit = e => {
         const user = { email };
-        fetch('http://powerful-taiga-38697.herokuapp.com/users/admin', {
+        fetch('https://powerful-taiga-38697.herokuapp.com/users/admin', {
             method: 'PUT',
             headers: {
                  'authorization': `Bearer ${token}`,

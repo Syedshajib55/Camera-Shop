@@ -3,12 +3,12 @@ const ManageAllOrders = () => {
     const [services, setServices] = useState([]);
     
     useEffect(()=>{
-        fetch('http://powerful-taiga-38697.herokuapp.com/services')
+        fetch('https://powerful-taiga-38697.herokuapp.com/services')
         .then( res => res.json())
         .then(data => setServices(data));
     }, [])
     const handleDelete = id =>{
-        const url = `http://powerful-taiga-38697.herokuapp.com/services/${id}`;
+        const url = `https://powerful-taiga-38697.herokuapp.com/services/${id}`;
         fetch(url, {
             method: 'DELETE'
         })
@@ -25,7 +25,7 @@ const ManageAllOrders = () => {
         <div>
             <h3 className='text-primary my-5'>All Users Orders</h3>
             {
-                services.map(service => <div key={service._id}>
+                services.slice(2,6)?.map(service => <div key={service._id}>
                     <h3>{service.name}</h3>
                     <img className="mt-2" src={service.img} alt="" />
                     <h3>Price : {service.price}$</h3>

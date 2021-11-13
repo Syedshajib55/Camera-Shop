@@ -33,15 +33,18 @@ function Dashboard(props) {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     let { path, url } = useRouteMatch();
     const { admin, logout } = useAuth();
+    
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+    
     const drawer = (
         <div>
             <Toolbar />
             <Divider />
             <Link to="/home"><Button color="inherit">Homepage</Button></Link><Divider />
             <Link to={`${url}`}><Button color="inherit">Dashboard</Button></Link><Divider />
+            
            {!admin && <Box>
             <Link to={`${url}/manageservices`}><Button color="inherit">Manage My Orders</Button></Link>
             <Divider />
