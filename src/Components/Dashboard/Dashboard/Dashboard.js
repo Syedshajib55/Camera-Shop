@@ -24,6 +24,7 @@ import Pay from './Pay/Pay';
 import ManageAllOrders from '../../ManageAllOrders/ManageAllOrders'
 import DashboardReview from '../DashboardReview/DashboardReview';
 import AddServiceAdmin from '../AddServiceAdmin.js/AddServiceAdmin';
+import ManageOrders from '../../ManageOrders/ManageOrders';
 
 const drawerWidth = 200;
 
@@ -31,7 +32,7 @@ function Dashboard(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     let { path, url } = useRouteMatch();
-    const { admin } = useAuth();
+    const { admin, logout } = useAuth();
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -41,16 +42,20 @@ function Dashboard(props) {
             <Divider />
             <Link to="/home"><Button color="inherit">Homepage</Button></Link><Divider />
             <Link to={`${url}`}><Button color="inherit">Dashboard</Button></Link><Divider />
+           {!admin && <Box>
             <Link to={`${url}/manageservices`}><Button color="inherit">Manage My Orders</Button></Link>
             <Divider />
-            <Link to={`${url}/manageallorders`}><Button color="inherit">Manage All Orders</Button></Link><Divider />
             <Link to={`${url}/pay`}><Button color="inherit">Pay</Button></Link><Divider />
             <Link to={`${url}/reviews`}><Button color="inherit">Review</Button></Link><Divider />
+           </Box>
+           }
             {admin && <Box>
                 <Link to={`${url}/makeadmin`}><Button color="inherit">Make Admin</Button></Link><Divider />
                 <Link to={`${url}/addservice`}><Button color="inherit">Add a Product</Button></Link><Divider />
+                <Link to={`${url}/manageallorders`}><Button color="inherit">Manage All Orders</Button></Link><Divider />
+                <Link to={`${url}/manageorders`}><Button color="inherit">Manage Orders</Button></Link><Divider />
             </Box>}
-            <Link to={`${url}/reviews`}><Button color="inherit">Logout</Button></Link><Divider />
+            <Button onClick={logout} color="inherit">Logout</Button><Divider/>
         </div>
     );
 
@@ -58,6 +63,7 @@ function Dashboard(props) {
 
     return (
         <Box sx={{ display: 'flex' }}>
+          
             <CssBaseline />
             <AppBar
                 position="fixed"
@@ -81,6 +87,7 @@ function Dashboard(props) {
                     </Typography>
                 </Toolbar>
             </AppBar>
+           
             <Box
                 component="nav"
                 sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -128,10 +135,12 @@ function Dashboard(props) {
                     <Route path={`${path}/manageservices`}>
                         <ManageServices></ManageServices>
                     </Route>
-                    <Route path={`${path}/manageallorders`}>
+                    <AdminRoute path={`${path}/manageallorders`}>
                         <ManageAllOrders></ManageAllOrders>
-                    </Route>
-                    {/* //AdminROute */}
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/manageorders`}>
+                        <ManageOrders></ManageOrders>
+                    </AdminRoute>
                     <AdminRoute path={`${path}/addservice`}>
                         <AddServiceAdmin></AddServiceAdmin>
                     </AdminRoute>
