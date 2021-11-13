@@ -1,10 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
-import useAuth from '../../Hooks/useAuth/useAuth';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
-const AddReview = () => {
+import useAuth from '../../../Hooks/useAuth/useAuth';
+const DashboardReview = () => {
     const{user} = useAuth();
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = data =>{
@@ -19,9 +17,7 @@ const AddReview = () => {
     return (
         
         <div className = "add-service">
-            <div>
-        <Header></Header>
-      </div>
+            
         <h2>Please Give a Review</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
             <input defaultValue={user.displayName} {...register("name")} placeholder="Name" />
@@ -29,11 +25,8 @@ const AddReview = () => {
             <input type="number" {...register("rating")} placeholder="Rating 0 to 5" />
             <input className="btn-primary" type="submit" />
         </form>
-        <div>
-        <Footer></Footer>
-      </div>
     </div>
     );
 };
 
-export default AddReview;
+export default DashboardReview;

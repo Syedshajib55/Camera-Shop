@@ -11,19 +11,22 @@ const Purchase = () => {
     const {serviceId } = useParams();
     const [service, setService] = useState({});
     const {user} = useAuth();
-    // const handlePurchase = e =>{
-    //     const appoinment = new 
-    // }
+
+    const handlePurchase = e =>{
+        e.preventDefault();
+        console.log('you clicked');
+        
+    }
     useEffect(()=>{
-        fetch(`http://localhost:5000/services/${serviceId}`)
+        fetch(`https://powerful-taiga-38697.herokuapp.com/services/${serviceId}`)
         .then( res => res.json())
         .then(data => setService(data));
     }, [serviceId])
     return (
         <div>
             <div>
-        <Header></Header>
-      </div>
+                <Header></Header>
+            </div>
             <h2 className='mt-5 ms-5 me-5 text-primary'>{service.name} and Get extra <span>25%</span> Discount </h2>
             <img src={service.img} alt="" />
             <h4>Price : {service.price}$</h4>
@@ -31,7 +34,7 @@ const Purchase = () => {
             <p className='mt-3 ms-5 me-5 p-2'>{service.description}</p>
             
             <form className="shipping-form p-5"
-            // onSubmit={handleSubmit(onSubmit)}
+            // onSubmit={handlePurchase(onSubmit)}
              >
                 <h3 className='text-primary'>Fiil Up the Form To Checkout</h3>
                 <input defaultValue={user.displayName} {...register("name")} />
@@ -43,9 +46,8 @@ const Purchase = () => {
                 <button className="btn btn-primary">Purchase</button> 
             </form>
             <div>
-        <Footer></Footer>
-      </div>
-            
+                <Footer></Footer>
+            </div>  
        </div>
     );
 };

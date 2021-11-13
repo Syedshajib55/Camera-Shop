@@ -49,7 +49,7 @@ function App() {
           <PrivateRoute path="/allorders">
               <ManageAllOrders></ManageAllOrders>
           </PrivateRoute>
-          <PrivateRoute path='/AddService'>
+          <PrivateRoute path='/addservice'>
               <AddService></AddService>
           </PrivateRoute>
           <PrivateRoute path='/manageServices'>

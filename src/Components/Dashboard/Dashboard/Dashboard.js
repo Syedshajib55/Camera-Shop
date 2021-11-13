@@ -6,45 +6,51 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import { Button } from '@mui/material';
 import {
     Switch,
     Route,
     Link,
-    useParams,
     useRouteMatch
 } from "react-router-dom";
+import { Button } from '@mui/material';
+import ManageServices from '../../ManageServices/ManageServices'
+import AdminRoute from '../AdminRoute/AdminRoute';
+import MakeAdmin from '../../MakeAdmin/MakeAdmin';
+import useAuth from '../../../Hooks/useAuth/useAuth';
+import Pay from './Pay/Pay';
+import ManageAllOrders from '../../ManageAllOrders/ManageAllOrders'
+import DashboardReview from '../DashboardReview/DashboardReview';
+import AddServiceAdmin from '../AddServiceAdmin.js/AddServiceAdmin';
 
 const drawerWidth = 200;
 
 function Dashboard(props) {
-    let { path, url } = useRouteMatch();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
-    const [date, setDate] = React.useState(new Date())
-
+    let { path, url } = useRouteMatch();
+    const { admin } = useAuth();
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
-
     const drawer = (
         <div>
             <Toolbar />
             <Divider />
-            <Link to="/"><Button color="inherit">HomePage</Button></Link>
-            <List>
-                
-            </List>
+            <Link to="/home"><Button color="inherit">Homepage</Button></Link><Divider />
+            <Link to={`${url}`}><Button color="inherit">Dashboard</Button></Link><Divider />
+            <Link to={`${url}/manageservices`}><Button color="inherit">Manage My Orders</Button></Link>
+            <Divider />
+            <Link to={`${url}/manageallorders`}><Button color="inherit">Manage All Orders</Button></Link><Divider />
+            <Link to={`${url}/pay`}><Button color="inherit">Pay</Button></Link><Divider />
+            <Link to={`${url}/reviews`}><Button color="inherit">Review</Button></Link><Divider />
+            {admin && <Box>
+                <Link to={`${url}/makeadmin`}><Button color="inherit">Make Admin</Button></Link><Divider />
+                <Link to={`${url}/addservice`}><Button color="inherit">Add a Product</Button></Link><Divider />
+            </Box>}
+            <Link to={`${url}/reviews`}><Button color="inherit">Logout</Button></Link><Divider />
         </div>
     );
 
@@ -111,19 +117,29 @@ function Dashboard(props) {
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
                 <Toolbar />
-                <Typography paragraph>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12} sm={5}>
-                            {/* <Calendar
-                                date={date}
-                                setDate={setDate}
-                            ></Calendar> */}
-                        </Grid>
-                        <Grid item xs={12} sm={7}>
-                            {/* <Appointments date={date}></Appointments> */}
-                        </Grid>
-                    </Grid>
-                </Typography>
+
+                <Switch>
+                    <Route path={`${path}/pay`}>
+                        <Pay></Pay>
+                    </Route>
+                    <Route path={`${path}/reviews`}>
+                        <DashboardReview></DashboardReview>
+                    </Route>
+                    <Route path={`${path}/manageservices`}>
+                        <ManageServices></ManageServices>
+                    </Route>
+                    <Route path={`${path}/manageallorders`}>
+                        <ManageAllOrders></ManageAllOrders>
+                    </Route>
+                    {/* //AdminROute */}
+                    <AdminRoute path={`${path}/addservice`}>
+                        <AddServiceAdmin></AddServiceAdmin>
+                    </AdminRoute>
+                    <AdminRoute path={`${path}/makeadmin`}>
+                        <MakeAdmin></MakeAdmin>
+                    </AdminRoute>
+                </Switch>
+
             </Box>
         </Box>
     );
