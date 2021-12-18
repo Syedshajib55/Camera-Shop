@@ -24,7 +24,7 @@ const ManageServices = () => {
     }
     return (
         <div>
-            <h3 className='text-primary my-5'>Manage My Orders</h3>
+            <h3 className='text-primary my-5'>Manage My Orders.</h3>
             {
                 services.slice(3,5)?.map(service => <div key={service._id}>
                     <h3>{service.name}</h3>
