@@ -28,7 +28,7 @@ const ManageServices = () => {
             {
                 services.slice(3,5)?.map(service => <div key={service._id}>
                     <h3>{service.name}</h3>
-                    <img className="mt-2" src={service.img} alt="" />
+                    <img className="mt-3" src={service.img} alt="" />
                     <h3>Price : {service.price}$</h3>
                         <button onClick={ ()=> handleDelete(service._id)} className='btn btn-danger mb-5'>Delete</button>
                     </div>)
