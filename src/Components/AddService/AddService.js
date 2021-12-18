@@ -11,7 +11,7 @@ const AddService = () => {
         axios.post('https://powerful-taiga-38697.herokuapp.com/services', data)
         .then(res => {
             if (res.data.insertedId) {
-                alert('added successfully');
+                alert('Added Successfully');
                 reset();
             }
         })
